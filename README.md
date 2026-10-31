@@ -10,7 +10,9 @@
 - **Locations:**
   - Branch 1: Vipul Khand 2, Gomti Nagar, Lucknow
   - Branch 2: Jeevan Plaza, Viram Khand 5, Gomti Nagar, Lucknow
-- **Target Domain:** `https://sai-dental-lucknow.vercel.app`
+- **Live Demo Link:** [https://saidental-five.vercel.app](https://saidental-five.vercel.app)
+- **Target Domain:** `https://saidental-five.vercel.app`
+- **Project Status:** `🚀 Pitched via WhatsApp / Awaiting Client Feedback`
 - **Google Reviews:** 4.9 ★ (151+ Verified Reviews)
 - **Instant Booking:** WhatsApp Direct Routing (+91 92351 79344)
 

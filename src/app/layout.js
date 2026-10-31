@@ -16,7 +16,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://sai-dental-lucknow.vercel.app"),
+  metadataBase: new URL("https://saidental-five.vercel.app"),
   title: "Sai Specialized Dental Hospital | Top-Rated Dentist in Gomti Nagar, Lucknow",
   icons: {
     icon: [
@@ -39,7 +39,7 @@ export const metadata = {
   openGraph: {
     title: "Sai Specialized Dental Hospital | Gomti Nagar Lucknow",
     description: "Advanced dental implants & painless dentistry in Gomti Nagar. Rated 4.9/5.0 (151+ Google Reviews).",
-    url: "https://sai-dental-lucknow.vercel.app",
+    url: "https://saidental-five.vercel.app",
     siteName: "Sai Specialized Dental Hospital",
     images: [
       {
