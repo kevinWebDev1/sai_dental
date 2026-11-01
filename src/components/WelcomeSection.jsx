@@ -11,6 +11,9 @@ export default function WelcomeSection({ onOpenDrawer, clinic }) {
     photo: "/doctors/dr_sumi_tiwari.png",
   };
   const doctorPhoto = leadDoctor.photo || leadDoctor.image || "/doctors/dr_sumi_tiwari.png";
+  const techPhoto = clinic?.photos?.tech || (isSai ? "/clinic/sai_clinic_photo_02.jpg" : "/clinic/neutral/digital_imaging_suite.jpg");
+  const deskPhoto = clinic?.photos?.desk || (isSai ? "/clinic/clinic_photo_2.jpg" : "/clinic/neutral/modern_consultation_desk.jpg");
+  const operatoryPhoto = clinic?.photos?.operatory || (isSai ? "/clinic/clinic_photo_2.jpg" : "/clinic/neutral/advanced_operatory.jpg");
   return (
     <section id="welcome" className="py-16 sm:py-24 bg-white relative overflow-hidden">
       <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9">
@@ -88,7 +91,7 @@ export default function WelcomeSection({ onOpenDrawer, clinic }) {
               {/* Bottom Center Floating Card: Chairside Technology & Patient Care */}
               <div className="w-full max-w-[340px] sm:max-w-[380px] aspect-[16/10] relative rounded-3xl overflow-hidden shadow-xl border-4 border-white/95 mt-9 hidden sm:block transition-transform duration-500 hover:-translate-y-1">
                 <Image
-                  src={isSai ? "/clinic/sai_clinic_photo_02.jpg" : "/clinic/neutral/digital_imaging_suite.jpg"}
+                  src={techPhoto}
                   alt="Chairside digital RVG examination and patient consultation"
                   fill
                   sizes="(max-width: 640px) 100vw, 380px"
@@ -101,7 +104,7 @@ export default function WelcomeSection({ onOpenDrawer, clinic }) {
             <div className="hidden lg:block lg:col-span-3">
               <div className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden shadow-xl border-4 border-white/95 bg-white transition-transform duration-500 hover:-translate-y-1">
                 <Image
-                  src={isSai ? "/clinic/clinic_photo_2.jpg" : "/clinic/neutral/modern_consultation_desk.jpg"}
+                  src={deskPhoto}
                   alt="Warm clinic consultation desk and patient reception"
                   fill
                   sizes="(max-width: 1280px) 25vw, 320px"
@@ -123,7 +126,7 @@ export default function WelcomeSection({ onOpenDrawer, clinic }) {
               </div>
               <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-md border-2 border-white/90 bg-white">
                 <Image
-                  src={isSai ? "/clinic/clinic_photo_2.jpg" : "/clinic/neutral/advanced_operatory.jpg"}
+                  src={operatoryPhoto}
                   alt="Clinic Reception"
                   fill
                   sizes="50vw"

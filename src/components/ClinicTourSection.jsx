@@ -61,7 +61,7 @@ export default function ClinicTourSection({ clinic }) {
     },
   ];
 
-  const photos = isSai ? saiPhotos : neutralPhotos;
+  const photos = clinic?.tourPhotos || (isSai ? saiPhotos : neutralPhotos);
 
   return (
     <section id="facility" className="py-16 sm:py-24 bg-white relative">

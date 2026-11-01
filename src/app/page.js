@@ -479,7 +479,7 @@ function DentalClinicContent() {
               <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group border border-slate-100">
                   <Image
-                    src={clinic.slug === "sai" ? "/clinic/clinic_photo_2.jpg" : "/clinic/neutral/modern_consultation_desk.jpg"}
+                    src={clinic?.photos?.desk || (clinic.slug === "sai" ? "/clinic/clinic_photo_2.jpg" : "/clinic/neutral/modern_consultation_desk.jpg")}
                     alt={`${clinic.name} Consultation Desk`}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -492,7 +492,7 @@ function DentalClinicContent() {
 
                 <div className="relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group border border-slate-100">
                   <Image
-                    src={clinic.slug === "sai" ? "/clinic/clinic_photo_3.jpg" : "/clinic/neutral/advanced_operatory.jpg"}
+                    src={clinic?.photos?.operatory || (clinic.slug === "sai" ? "/clinic/clinic_photo_3.jpg" : "/clinic/neutral/advanced_operatory.jpg")}
                     alt="Sanitized Dental Operatory"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
