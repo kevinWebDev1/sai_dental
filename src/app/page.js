@@ -118,57 +118,7 @@ function DentalClinicContent() {
   ];
 
   const displayedServices = showAllServices ? servicePillars : servicePillars.slice(0, 2);
-
-  const testimonials = [
-    {
-      name: "Raghav Vasan",
-      location: "Verified Patient • 7 Google Reviews",
-      rating: 5,
-      avatarBg: "bg-[#6da5d8] text-white",
-      review: "Been coming here since my childhood, best affordably priced clinic, doctor has very good hands, listens and tends to all issues very patiently, had multiple RCT and filling treatments never faced any issues.",
-      tag: "Multiple RCT & Fillings",
-    },
-    {
-      name: "Huma Mirza",
-      location: "Verified Patient • 1 Google Review",
-      rating: 5,
-      avatarBg: "bg-[#D4F634] text-slate-950 font-black",
-      review: "One of the best dental clinics in Lucknow. I have a very good experience of their treatment and service. Highly cooperative clinicians and best dental care as per my experience.",
-      tag: "Specialist Care",
-    },
-    {
-      name: "Madhu Tiwari",
-      location: "Verified Patient • 1 Google Review",
-      rating: 5,
-      avatarBg: "bg-[#38537b] text-white",
-      review: "Great experience at this clinic, would recommend it to anyone looking for quality treatment at affordable price! The doctors make you feel completely at ease.",
-      tag: "Affordable Quality",
-    },
-    {
-      name: "Akhilesh Singh",
-      location: "Verified Patient • 12 Google Reviews",
-      rating: 5,
-      avatarBg: "bg-teal-700 text-white",
-      review: "Excellent Services. Very good doctor and team. Highly hygienic setup with digital X-rays and transparent explanations before starting any treatment.",
-      tag: "Doctor & Team",
-    },
-    {
-      name: "Ranjeet Vishwakarma",
-      location: "Local Guide • 2 Reviews • 21 Photos",
-      rating: 5,
-      avatarBg: "bg-indigo-700 text-white",
-      review: "Nice clinic and good facilities and effective treatment. Very experienced and caring clinicians.",
-      tag: "Clinic & Facilities",
-    },
-    {
-      name: "Prateek Srivastava",
-      location: "Verified Patient • 3 Google Reviews",
-      rating: 5,
-      avatarBg: "bg-blue-600 text-white",
-      review: "Very professional and clean setup. The doctor explained the procedure step-by-step and completed it without any pain. Highly recommended in Gomti Nagar.",
-      tag: "Dental Implant Care",
-    },
-  ];
+  const testimonials = clinic.testimonials || [];
 
   return (
     <>
@@ -529,7 +479,7 @@ function DentalClinicContent() {
               <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group border border-slate-100">
                   <Image
-                    src="/clinic/clinic_photo_2.jpg"
+                    src={clinic.slug === "sai" ? "/clinic/clinic_photo_2.jpg" : "/clinic/neutral/modern_consultation_desk.jpg"}
                     alt={`${clinic.name} Consultation Desk`}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -542,7 +492,7 @@ function DentalClinicContent() {
 
                 <div className="relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group border border-slate-100">
                   <Image
-                    src="/clinic/clinic_photo_3.jpg"
+                    src={clinic.slug === "sai" ? "/clinic/clinic_photo_3.jpg" : "/clinic/neutral/advanced_operatory.jpg"}
                     alt="Sanitized Dental Operatory"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -582,7 +532,7 @@ function DentalClinicContent() {
         {/* ==================================================================
             8. REAL CLINIC TOUR & FACILITY (High-Res Photos)
             ================================================================== */}
-        <ClinicTourSection />
+        <ClinicTourSection clinic={clinic} />
 
         {/* ==================================================================
             9. WHAT OUR PATIENTS SAY (Verified Social Proof Wall)
@@ -958,11 +908,17 @@ function DentalClinicContent() {
         <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-white p-1 overflow-hidden shrink-0 shadow-sm border border-slate-700 flex items-center justify-center">
-              <img
-                src="/clinic_logo.png"
-                alt={clinic.name}
-                className="w-full h-full object-contain"
-              />
+              {clinic.slug === "sai" ? (
+                <img
+                  src="/clinic_logo.png"
+                  alt={clinic.name}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-[#1c2e4a] to-[#38537b] flex items-center justify-center text-[#D4F634] font-black text-xs tracking-wider rounded-full">
+                  {clinic.initials || "DC"}
+                </div>
+              )}
             </div>
             <div>
               <h4 className="text-white font-bold text-base">{clinic.name}</h4>

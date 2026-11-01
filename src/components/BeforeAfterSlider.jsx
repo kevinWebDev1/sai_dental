@@ -49,7 +49,7 @@ export default function BeforeAfterSlider({ onOpenDrawer }) {
         },
         {
           label: "After Porcelain Veneers",
-          image: "/cases/Dental_treatment_outcome_smile.jpg",
+          image: "/cases/case_veneer_3.jpg",
           alt: "Finished aesthetic outcome showing radiant patient smile with closed gap",
         },
       ],

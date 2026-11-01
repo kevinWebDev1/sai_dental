@@ -132,11 +132,17 @@ export default function AppointmentDrawer({ isOpen, onClose, clinic }) {
             {/* Hospital Emblem Badge */}
             <div className="flex items-center gap-2.5 mb-6">
               <div className="w-9 h-9 rounded-xl bg-white p-1 border border-white/20 flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
-                <img
-                  src="/clinic_logo.png"
-                  alt={`${clinicName} Official Logo`}
-                  className="w-full h-full object-contain"
-                />
+                {clinic?.slug === "sai" || !clinic ? (
+                  <img
+                    src="/clinic_logo.png"
+                    alt={`${clinicName} Official Logo`}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-[#1c2e4a] to-[#38537b] flex items-center justify-center text-[#D4F634] font-black text-xs tracking-wider rounded-lg">
+                    {clinic?.initials || "DC"}
+                  </div>
+                )}
               </div>
               <div>
                 <span className="text-[10px] uppercase font-bold tracking-widest text-sky-200 block">

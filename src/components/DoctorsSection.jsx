@@ -55,7 +55,9 @@ export default function DoctorsSection({ onOpenDrawer, customDoctors }) {
             Meet Your Treating Specialists
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
-            Dedicated clinicians providing gentle, hospital-grade care across both our Gomti Nagar facilities.
+            {doctors.length > 1
+              ? "Dedicated clinicians providing gentle, hospital-grade care across both our Gomti Nagar facilities."
+              : "Dedicated specialist providing gentle, hospital-grade dental care in Gomti Nagar."}
           </p>
         </div>
 

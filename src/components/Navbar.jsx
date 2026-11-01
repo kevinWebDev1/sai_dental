@@ -37,11 +37,17 @@ export default function Navbar({ onOpenDrawer, clinic }) {
         {/* Brand identity: Official Circular Emblem Logo + Clean Clinic Brand Mark */}
         <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
           <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 shadow-sm border border-white/40 bg-white transition-transform group-hover:scale-105 flex items-center justify-center">
-            <img
-              src="/clinic_logo.png"
-              alt="Sai Specialized Dental Hospital Official Logo"
-              className="w-full h-full object-contain p-1"
-            />
+            {clinic?.slug === "sai" || !clinic ? (
+              <img
+                src="/clinic_logo.png"
+                alt={`${clinicName} Official Logo`}
+                className="w-full h-full object-contain p-1"
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-[#1c2e4a] to-[#38537b] flex items-center justify-center text-[#D4F634] font-black text-xs sm:text-sm tracking-wider">
+                {clinic?.initials || brandTitle.slice(0, 2)}
+              </div>
+            )}
           </div>
           <div className="flex flex-col">
             <span className="font-heading font-bold text-base sm:text-lg text-white tracking-tight leading-none">
