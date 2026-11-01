@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 
-export default function WelcomeSection({ onOpenDrawer }) {
+export default function WelcomeSection({ onOpenDrawer, clinic }) {
+  const clinicName = clinic?.name || "Sai Specialized Dental Hospital";
+  const leadDoctor = clinic?.doctors?.[0] || {
+    name: "Dr. Sumi Tiwari",
+    role: "Lead Dental Surgeon",
+    image: "/doctors/dr_sumi_tiwari.png",
+  };
   return (
     <section id="welcome" className="py-16 sm:py-24 bg-white relative overflow-hidden">
       <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9">
@@ -34,8 +40,8 @@ export default function WelcomeSection({ onOpenDrawer }) {
             <div className="hidden lg:block lg:col-span-3">
               <div className="relative aspect-[3/4] w-full rounded-3xl overflow-hidden shadow-xl border-4 border-white/95 bg-white transition-transform duration-500 hover:-translate-y-1">
                 <Image
-                  src="/doctors/dr_sumi_tiwari.png"
-                  alt="Dr. Sumi Tiwari - Lead Dental Surgeon"
+                  src={leadDoctor.image || "/doctors/dr_sumi_tiwari.png"}
+                  alt={`${leadDoctor.name} - ${leadDoctor.role}`}
                   fill
                   sizes="(max-width: 1280px) 25vw, 320px"
                   className="object-cover object-top"
@@ -47,7 +53,7 @@ export default function WelcomeSection({ onOpenDrawer }) {
             {/* Center Editorial Column: High-Impact Typography & Narrative */}
             <div className="lg:col-span-6 text-center max-w-xl mx-auto flex flex-col items-center">
               <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.22em] text-slate-500 mb-3 block">
-                Welcome to Sai Specialized Dental Hospital
+                Welcome to {clinicName}
               </span>
 
               <h2 className="font-heading font-serif text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-[2.9rem] text-slate-900 tracking-tight leading-[1.18] mb-5">
@@ -106,8 +112,8 @@ export default function WelcomeSection({ onOpenDrawer }) {
             <div className="grid grid-cols-2 gap-3 sm:hidden w-full mt-2">
               <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-md border-2 border-white/90 bg-white">
                 <Image
-                  src="/doctors/dr_sumi_tiwari.png"
-                  alt="Dr. Sumi Tiwari"
+                  src={leadDoctor.image || "/doctors/dr_sumi_tiwari.png"}
+                  alt={leadDoctor.name}
                   fill
                   sizes="50vw"
                   className="object-cover object-top"

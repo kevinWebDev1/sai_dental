@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { FaWhatsapp, FaPhone, FaLocationDot, FaGoogle } from "react-icons/fa6";
+import { useSearchParams } from "next/navigation";
+import { getClinicConfig } from "@/config/clinics";
+
 import Navbar from "@/components/Navbar";
 import MobileDock from "@/components/MobileDock";
 import AppointmentDrawer from "@/components/AppointmentDrawer";
@@ -13,9 +16,13 @@ import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import TechnologySection from "@/components/TechnologySection";
 import ClinicTourSection from "@/components/ClinicTourSection";
 
-export default function Home() {
+function DentalClinicContent() {
+  const searchParams = useSearchParams();
+  const clinic = getClinicConfig(searchParams);
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeBranch, setActiveBranch] = useState("vipul"); // 'vipul' | 'viram'
+  const [showAllServices, setShowAllServices] = useState(false);
 
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
@@ -51,12 +58,12 @@ export default function Home() {
     }
   };
 
-  const currentBranch = branches[activeBranch];
+  const currentBranch = branches[activeBranch] || branches.vipul;
 
   const servicePillars = [
     {
       title: "Permanent Dental Implants",
-      kicker: "Founder Specialty • Dr. Rahul Tiwari",
+      kicker: "Specialized Restoration",
       desc: "Restore 100% natural bite strength and lifelong smile aesthetics. Using biocompatible titanium posts and custom Vita ceramic crowns, single-tooth and full-arch implants integrate permanently with jawbone for lifelong stability.",
       buttonText: "Implant Consultation",
       image: "/services/service_implants.jpg",
@@ -65,7 +72,7 @@ export default function Home() {
     },
     {
       title: "Painless Root Canal (RCT)",
-      kicker: "Endodontic Care • Dr. Sumi Tiwari",
+      kicker: "Endodontic Tooth Preservation",
       desc: "Save severely infected or broken teeth and relieve pain in a single gentle sitting. Computerized Endoradar apex locators and Marathon rotary micro-motors clean curved root canals with sub-millimeter precision and zero manual scraping.",
       buttonText: "Painless RCT Care",
       image: "/services/service_root_canal.jpg",
@@ -101,7 +108,7 @@ export default function Home() {
     },
     {
       title: "Crowns & Dental Bridges",
-      kicker: "Prosthodontic Restoration • Dr. Rahul Tiwari",
+      kicker: "Prosthodontic Restoration",
       desc: "Custom-milled zirconia and ceramic crowns and multi-unit bridges that permanently restore damaged, broken, or missing teeth with natural chewing strength and shade-matched perfection.",
       buttonText: "Crown & Bridge Consult",
       image: "/services/service_crowns_bridges.jpg",
@@ -110,13 +117,15 @@ export default function Home() {
     },
   ];
 
+  const displayedServices = showAllServices ? servicePillars : servicePillars.slice(0, 2);
+
   const testimonials = [
     {
       name: "Raghav Vasan",
       location: "Verified Patient • 7 Google Reviews",
       rating: 5,
       avatarBg: "bg-[#6da5d8] text-white",
-      review: "Been coming here since my childhood, best affordably priced clinic, Dr Sumi has very good hands listens and tends to all issues very patiently, had multiple RCT and filling treatments never faced any issues.",
+      review: "Been coming here since my childhood, best affordably priced clinic, doctor has very good hands, listens and tends to all issues very patiently, had multiple RCT and filling treatments never faced any issues.",
       tag: "Multiple RCT & Fillings",
     },
     {
@@ -124,15 +133,15 @@ export default function Home() {
       location: "Verified Patient • 1 Google Review",
       rating: 5,
       avatarBg: "bg-[#D4F634] text-slate-950 font-black",
-      review: "One of the best dentist in Lucknow. I have a very good experience of their treatment and service. Dr. Sumi ma'am is very cooperative and best dentist as per my experience.",
-      tag: "Dr. Sumi Treatment",
+      review: "One of the best dental clinics in Lucknow. I have a very good experience of their treatment and service. Highly cooperative clinicians and best dental care as per my experience.",
+      tag: "Specialist Care",
     },
     {
       name: "Madhu Tiwari",
       location: "Verified Patient • 1 Google Review",
       rating: 5,
       avatarBg: "bg-[#38537b] text-white",
-      review: "Great experience at this clinic, would recommend it to anyone looking for quality treatment at affordable price! Dr. Rahul and Dr. Sumi make you feel at home.",
+      review: "Great experience at this clinic, would recommend it to anyone looking for quality treatment at affordable price! The doctors make you feel completely at ease.",
       tag: "Affordable Quality",
     },
     {
@@ -148,7 +157,7 @@ export default function Home() {
       location: "Local Guide • 2 Reviews • 21 Photos",
       rating: 5,
       avatarBg: "bg-indigo-700 text-white",
-      review: "Nice clinic and good facilities and effective treatment. Both Dr. Sumi and Dr. Rahul are very experienced clinicians.",
+      review: "Nice clinic and good facilities and effective treatment. Very experienced and caring clinicians.",
       tag: "Clinic & Facilities",
     },
     {
@@ -156,19 +165,16 @@ export default function Home() {
       location: "Verified Patient • 3 Google Reviews",
       rating: 5,
       avatarBg: "bg-blue-600 text-white",
-      review: "Very professional and clean setup. Dr. Rahul explained the implant procedure step-by-step and completed it without any pain. Highly recommended in Gomti Nagar.",
+      review: "Very professional and clean setup. The doctor explained the procedure step-by-step and completed it without any pain. Highly recommended in Gomti Nagar.",
       tag: "Dental Implant Care",
     },
   ];
 
   return (
     <>
-      <Navbar onOpenDrawer={openDrawer} />
+      <Navbar onOpenDrawer={openDrawer} clinic={clinic} />
 
       <main className="overflow-hidden">
-        {/* ==================================================================
-            1. HERO SECTION (Editorial Blue Canvas Inspired by SmileLab Direction)
-            ================================================================== */}
         {/* ==================================================================
             1. HERO SECTION (Editorial Sky-Blue Canvas & Full-Bleed Right Artwork)
             ================================================================== */}
@@ -185,7 +191,7 @@ export default function Home() {
             >
               <Image
                 src="/hero/Dentists_cleaning_giant_tooth_2K.jpg"
-                alt="Miniature dental surgeons cleaning giant molar tooth - Sai Specialized Dental Hospital"
+                alt={`Miniature dental surgeons cleaning giant molar tooth - ${clinic.name}`}
                 fill
                 priority
                 className="object-contain object-right-bottom hover:scale-[1.01] transition-transform duration-500"
@@ -194,7 +200,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Main Content Container: Left aligned to green checkmark line */}
+          {/* Main Content Container */}
           <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9 z-10 flex-1 flex flex-col justify-between h-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end flex-1 h-full">
 
@@ -221,41 +227,37 @@ export default function Home() {
 
                   {/* Supporting Paragraph */}
                   <p className="text-white/90 text-sm sm:text-base lg:text-[1.05rem] xl:text-[1.15rem] leading-[1.5] max-w-[500px] xl:max-w-[540px] mb-4 lg:mb-5 font-normal">
-                    Using <strong className="text-white font-medium">advanced technology</strong>, we deliver gentle, comprehensive dental care across Gomti Nagar under one roof.
+                    {clinic.heroSubhead || "Using advanced technology, we deliver gentle, comprehensive dental care across Gomti Nagar under one roof."}
                   </p>
 
-                  {/* Dual-Branch WhatsApp Booking Action Bar */}
+                  {/* WhatsApp Booking Action Bar */}
                   <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-                    <a
-                      href="https://wa.me/919235179344?text=Hello%20Dr.%20Sumi,%20I%20would%20like%20to%20book%20an%20appointment%20at%20Vipul%20Khand%20(Jeevan%20Plaza)%20branch."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#D4F634] hover:bg-[#c6eb2b] text-slate-950 font-bold text-xs sm:text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                      <FaWhatsapp className="w-4 h-4 shrink-0 text-slate-950" />
-                      <span>Book Vipul Khand (Dr. Sumi)</span>
-                      <ArrowUpRight className="w-4 h-4 shrink-0" />
-                    </a>
-                    <a
-                      href="https://wa.me/919935571751?text=Hello%20Dr.%20Rahul,%20I%20would%20like%20to%20book%20an%20appointment%20at%20Viram%20Khand%20branch."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/15 hover:bg-white/25 text-white font-semibold text-xs sm:text-sm border border-white/30 backdrop-blur-sm transition-all hover:scale-[1.02]"
-                    >
-                      <FaWhatsapp className="w-4 h-4 shrink-0 text-white" />
-                      <span>Book Viram Khand (Dr. Rahul)</span>
-                      <ArrowUpRight className="w-4 h-4 shrink-0" />
-                    </a>
+                    {clinic.heroButtons.map((btn, idx) => (
+                      <a
+                        key={idx}
+                        href={`https://wa.me/${btn.phone}?text=${encodeURIComponent(btn.message)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={
+                          idx === 0
+                            ? "inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#D4F634] hover:bg-[#c6eb2b] text-slate-950 font-bold text-xs sm:text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]"
+                            : "inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/15 hover:bg-white/25 text-white font-semibold text-xs sm:text-sm border border-white/30 backdrop-blur-sm transition-all hover:scale-[1.02]"
+                        }
+                      >
+                        <FaWhatsapp className={`w-4 h-4 shrink-0 ${idx === 0 ? "text-slate-950" : "text-white"}`} />
+                        <span>{btn.label}</span>
+                        <ArrowUpRight className="w-4 h-4 shrink-0" />
+                      </a>
+                    ))}
                   </div>
                 </div>
 
                 {/* Bottom Left Row: Smiling Patient Proof Grounded at the Baseline (Desktop Only) */}
                 <div className="hidden lg:flex items-end w-full mt-auto">
-                  {/* Smiling Patient Cutout Card: Scaled to prominent presence and grounded */}
                   <div className="relative w-64 lg:w-76 xl:w-88 2xl:w-[25rem] h-64 lg:h-76 xl:h-88 2xl:h-[25rem] shrink-0">
                     <Image
                       src="/hero/hero_patient_stat.png"
-                      alt="98% loyal dental patients - Sai Specialized Dental Hospital"
+                      alt={`98% loyal dental patients - ${clinic.name}`}
                       fill
                       priority
                       sizes="(max-width: 1024px) 256px, 400px"
@@ -265,12 +267,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Mobile / Tablet Artwork View (< lg screens only) - Natural 1:1 Aspect Ratio */}
+              {/* Mobile / Tablet Artwork View (< lg screens only) */}
               <div className="lg:hidden relative w-screen -mx-5 sm:-mx-7 sm:w-full sm:mx-auto sm:max-w-[500px] aspect-square flex items-end justify-center mt-2 sm:mt-4">
                 <div className="relative w-full h-full">
                   <Image
                     src="/hero/Dentists_cleaning_giant_tooth_2K.jpg"
-                    alt="Miniature dental surgeons cleaning giant molar tooth - Sai Specialized Dental Hospital"
+                    alt={`Miniature dental surgeons cleaning giant molar tooth - ${clinic.name}`}
                     fill
                     priority
                     className="object-contain object-bottom"
@@ -291,7 +293,7 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-[#6da5d8]/20">
               <div className="pt-2 md:pt-0">
                 <div className="font-heading font-bold text-3xl sm:text-4xl text-slate-900 flex items-center justify-center gap-1.5">
-                  <span>4.9</span>
+                  <span>{clinic.rating || "4.9"}</span>
                   <svg className="w-5 h-5 text-amber-400 fill-current inline-block" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
@@ -299,7 +301,7 @@ export default function Home() {
                 <div className="text-xs sm:text-sm font-medium text-slate-600 mt-1.5">Google Patient Rating</div>
               </div>
               <div className="pt-4 md:pt-0">
-                <div className="font-heading font-bold text-3xl sm:text-4xl text-slate-900">151+</div>
+                <div className="font-heading font-bold text-3xl sm:text-4xl text-slate-900">{clinic.reviews || "151+"}</div>
                 <div className="text-xs sm:text-sm font-medium text-slate-600 mt-1.5">Verified Local Reviews</div>
               </div>
               <div className="pt-4 md:pt-0">
@@ -315,18 +317,18 @@ export default function Home() {
         </section>
 
         {/* ==================================================================
-            2.5. WELCOME TO SAI SPECIALIZED DENTAL HOSPITAL (Torrance Dentist-Inspired Standout Showcase)
+            2.5. WELCOME TO CLINIC (Torrance Dentist-Inspired Standout Showcase)
             ================================================================== */}
-        <WelcomeSection onOpenDrawer={openDrawer} />
+        <WelcomeSection onOpenDrawer={openDrawer} clinic={clinic} />
 
         {/* ==================================================================
             3. TREATING SPECIALISTS & DOCTORS SECTION (Real Clinician Bios)
             ================================================================== */}
-        <DoctorsSection onOpenDrawer={openDrawer} />
+        <DoctorsSection onOpenDrawer={openDrawer} customDoctors={clinic.doctors} />
 
         {/* ==================================================================
             4. OUR SERVICES: COMPREHENSIVE CLINICAL TREATMENTS
-            Concrete services with matching clinical visual photography
+            Top 2 Marquee Initially + Expand/Collapse Down Arrow Toggle
             ================================================================== */}
         <section id="treatments" className="py-16 sm:py-24 bg-white border-t border-slate-100">
           <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9">
@@ -344,10 +346,9 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Asymmetrical Horizontal Masonry Cards (Torrance Dentist-Inspired Shifting Seams) */}
+            {/* Asymmetrical Horizontal Masonry Cards */}
             <div className="space-y-14 sm:space-y-18 max-w-[1340px] mx-auto">
-              {servicePillars.map((pillar, idx) => {
-                // Shifting horizontal masonry column splits across all 6 treatments:
+              {displayedServices.map((pillar, idx) => {
                 const configs = [
                   { textCols: "lg:col-span-5", imgCols: "lg:col-span-7", textOrder: "lg:order-1", imgOrder: "lg:order-2" },
                   { textCols: "lg:col-span-7", imgCols: "lg:col-span-5", textOrder: "lg:order-2", imgOrder: "lg:order-1" },
@@ -403,11 +404,11 @@ export default function Home() {
                       </div>
                     </div>
 
-                    {/* Matching Real Clinical Photograph (Desktop 4:3 vs Mobile 3:4) */}
+                    {/* Matching Real Clinical Photograph */}
                     <div
                       className={`${cfg.imgCols} ${cfg.imgOrder} relative rounded-3xl overflow-hidden min-h-[380px] sm:min-h-[420px] bg-slate-100 shadow-sm border border-slate-100`}
                     >
-                      {/* Mobile 3:4 Aspect Portrait (< sm screens) */}
+                      {/* Mobile 3:4 Aspect Portrait */}
                       <div className="block sm:hidden relative w-full h-full min-h-[360px] aspect-[3/4]">
                         <Image
                           src={pillar.mobileImage || pillar.image}
@@ -417,7 +418,7 @@ export default function Home() {
                           className="object-cover"
                         />
                       </div>
-                      {/* Desktop 4:3 Aspect Landscape (>= sm screens) */}
+                      {/* Desktop 4:3 Aspect Landscape */}
                       <div className="hidden sm:block relative w-full h-full min-h-[380px] sm:min-h-[420px]">
                         <Image
                           src={pillar.image}
@@ -433,11 +434,31 @@ export default function Home() {
               })}
             </div>
 
+            {/* Expand / Collapse Pill Toggle Button */}
+            <div className="mt-12 sm:mt-16 text-center">
+              <button
+                type="button"
+                onClick={() => setShowAllServices(!showAllServices)}
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all group border border-slate-700"
+              >
+                <span>
+                  {showAllServices
+                    ? "Show Less Treatments"
+                    : `Explore All ${servicePillars.length} Specialized Treatments`}
+                </span>
+                <ChevronDown
+                  className={`w-4 h-4 text-[#D4F634] transition-transform duration-300 ${
+                    showAllServices ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+            </div>
+
           </div>
         </section>
 
         {/* ==================================================================
-            5. ADVANCED CLINICAL TECHNOLOGY (Apex Locators, RVG, Autoclave)
+            5. ADVANCED CLINICAL TECHNOLOGY (Top 2 Initially + Toggle Button)
             ================================================================== */}
         <TechnologySection onOpenDrawer={openDrawer} />
 
@@ -447,7 +468,7 @@ export default function Home() {
         <BeforeAfterSlider onOpenDrawer={openDrawer} />
 
         {/* ==================================================================
-            4. HYGIENE PROTOCOLS & REAL CLINIC CONSULTATION DESK (#about & #why-us)
+            7. HYGIENE PROTOCOLS & CLINIC TRUST
             ================================================================== */}
         <section id="about" className="py-14 sm:py-20 lg:py-24 bg-white border-t border-[#6da5d8]/15">
           <div id="why-us" className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9">
@@ -456,10 +477,10 @@ export default function Home() {
               {/* Left Column: Why Choose Us */}
               <div className="lg:col-span-6">
                 <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f0f5fc] text-[#38537b] text-xs font-semibold uppercase tracking-wider mb-3.5 border border-[#6da5d8]/25">
-                  Safety & Ethics
+                  Safety &amp; Ethics
                 </span>
                 <h2 className="font-heading font-bold text-2xl sm:text-3xl lg:text-4xl text-slate-900 tracking-tight mb-4">
-                  Why Gomti Nagar Families Trust Sai Dental
+                  Why Gomti Nagar Families Trust {clinic.name}
                 </h2>
                 <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
                   We maintain strict clinical transparency, hospital-level sterilization, and gentle bedside manners so you feel relaxed and confident from the moment you step in.
@@ -509,7 +530,7 @@ export default function Home() {
                 <div className="relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group border border-slate-100">
                   <Image
                     src="/clinic/clinic_photo_2.jpg"
-                    alt="Sai Specialized Dental Consultation Desk"
+                    alt={`${clinic.name} Consultation Desk`}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -522,7 +543,7 @@ export default function Home() {
                 <div className="relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group border border-slate-100">
                   <Image
                     src="/clinic/clinic_photo_3.jpg"
-                    alt="Active Dental Treatment Operatory"
+                    alt="Sanitized Dental Operatory"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -540,8 +561,8 @@ export default function Home() {
                       Dr
                     </div>
                     <div>
-                      <div className="text-xs sm:text-sm font-bold text-white">Chief Dental Surgeon &amp; Specialist Team</div>
-                      <div className="text-[11px] text-white/80">15+ Yrs Clinical Excellence • Gomti Nagar, Lucknow</div>
+                      <div className="text-xs sm:text-sm font-bold text-white">{clinic.doctorName} &amp; Specialist Team</div>
+                      <div className="text-[11px] text-white/80">{clinic.area}</div>
                     </div>
                   </div>
                   <button
@@ -559,18 +580,14 @@ export default function Home() {
         </section>
 
         {/* ==================================================================
-            7. REAL CLINIC TOUR & FACILITY (High-Res Google Maps Photos)
+            8. REAL CLINIC TOUR & FACILITY (High-Res Photos)
             ================================================================== */}
         <ClinicTourSection />
 
         {/* ==================================================================
-            5. VERIFIED GOOGLE REVIEWS (Social Proof Wall)
-            ================================================================== */}
-        {/* ==================================================================
-            5. WHAT OUR PATIENTS SAY (Curely-Inspired High-Contrast Social Proof)
+            9. WHAT OUR PATIENTS SAY (Verified Social Proof Wall)
             ================================================================== */}
         <section id="reviews" className="py-16 sm:py-24 bg-[#6da5d8] text-white relative overflow-hidden">
-          {/* Subtle Ambient Glow */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-sky-400/10 blur-[140px] rounded-full pointer-events-none" />
 
           <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9 relative z-10">
@@ -581,18 +598,18 @@ export default function Home() {
                 <svg className="w-3.5 h-3.5 text-amber-300 fill-current shrink-0" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                <span>4.9 Rating • 151+ Google Reviews</span>
+                <span>{clinic.rating || "4.9"} Rating • {clinic.reviews || "151+"} Google Reviews</span>
               </span>
 
               <h2 className="font-heading font-normal text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
                 What Our Patients Say
               </h2>
               <p className="text-white/80 text-sm sm:text-base mt-3 leading-relaxed">
-                Honest feedback from Lucknow families who trust Sai Specialized Dental Hospital for gentle, unhurried care.
+                Honest feedback from Lucknow families who trust {clinic.name} for gentle, unhurried care.
               </p>
             </div>
 
-            {/* Balanced 3x2 Grid (Curely-Style White Floating Cards) */}
+            {/* Balanced 3x2 Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-[1340px] mx-auto">
               {testimonials.map((item, idx) => (
                 <div
@@ -615,7 +632,6 @@ export default function Home() {
                       </span>
                     </div>
 
-                    {/* Clean, Non-Italic Quote */}
                     <p className="text-slate-800 text-sm sm:text-[0.95rem] leading-relaxed mb-6 font-normal">
                       &ldquo;{item.review}&rdquo;
                     </p>
@@ -644,7 +660,8 @@ export default function Home() {
         </section>
 
         {/* ==================================================================
-            9. DUAL CLINIC LOCATIONS, HOURS & INTERACTIVE GOOGLE MAPS EMBED
+            10. CLINIC LOCATION, HOURS & GOOGLE MAPS EMBED
+            Adapts between Dual-Branch Switcher (Sai) and Single-Branch Showcase
             ================================================================== */}
         <section id="location" className="py-14 sm:py-20 lg:py-24 bg-white border-t border-[#6da5d8]/15">
           <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9">
@@ -652,40 +669,46 @@ export default function Home() {
             {/* Section Header */}
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f0f5fc] text-[#38537b] text-xs font-semibold uppercase tracking-wider mb-3.5 border border-[#6da5d8]/25 shadow-xs">
-                Two Convenient Branches
+                {clinic.hasMultipleBranches ? "Two Convenient Branches" : "Hospital Location & Hours"}
               </span>
               <h2 className="font-heading font-bold text-2xl sm:text-3xl lg:text-4xl text-slate-900 tracking-tight">
-                Visit Us in Gomti Nagar, Lucknow
+                Visit Us in {clinic.area || "Gomti Nagar, Lucknow"}
               </h2>
               <p className="text-slate-600 text-sm sm:text-base mt-2.5">
-                Sai Specialized Dental Hospital operates two fully equipped clinical centers to serve you.
+                {clinic.hasMultipleBranches
+                  ? `${clinic.name} operates two fully equipped clinical centers to serve you.`
+                  : `${clinic.name} welcomes you for gentle, unhurried hospital dental care.`}
               </p>
 
-              {/* Interactive Branch Switcher Tabs */}
-              <div className="mt-6 inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner">
-                <button
-                  onClick={() => setActiveBranch("vipul")}
-                  className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${activeBranch === "vipul"
-                      ? "bg-[#38537b] text-white shadow-md"
-                      : "text-slate-600 hover:text-slate-900"
+              {/* Interactive Branch Switcher Tabs (Only if multiple branches) */}
+              {clinic.hasMultipleBranches && (
+                <div className="mt-6 inline-flex p-1.5 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner">
+                  <button
+                    onClick={() => setActiveBranch("vipul")}
+                    className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
+                      activeBranch === "vipul"
+                        ? "bg-[#38537b] text-white shadow-md"
+                        : "text-slate-600 hover:text-slate-900"
                     }`}
-                >
-                  <span className={`w-2 h-2 rounded-full ${activeBranch === "vipul" ? "bg-[#D4F634]" : "bg-slate-400"}`} />
-                  <span>Branch 1: Vipul Khand 2</span>
-                  <span className="text-[10px] hidden sm:inline px-1.5 py-0.5 rounded bg-white/20">Dr. Sumi</span>
-                </button>
-                <button
-                  onClick={() => setActiveBranch("viram")}
-                  className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${activeBranch === "viram"
-                      ? "bg-[#38537b] text-white shadow-md"
-                      : "text-slate-600 hover:text-slate-900"
+                  >
+                    <span className={`w-2 h-2 rounded-full ${activeBranch === "vipul" ? "bg-[#D4F634]" : "bg-slate-400"}`} />
+                    <span>Branch 1: Vipul Khand 2</span>
+                    <span className="text-[10px] hidden sm:inline px-1.5 py-0.5 rounded bg-white/20">Dr. Sumi</span>
+                  </button>
+                  <button
+                    onClick={() => setActiveBranch("viram")}
+                    className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
+                      activeBranch === "viram"
+                        ? "bg-[#38537b] text-white shadow-md"
+                        : "text-slate-600 hover:text-slate-900"
                     }`}
-                >
-                  <span className={`w-2 h-2 rounded-full ${activeBranch === "viram" ? "bg-[#D4F634]" : "bg-slate-400"}`} />
-                  <span>Branch 2: Viram Khand 1</span>
-                  <span className="text-[10px] hidden sm:inline px-1.5 py-0.5 rounded bg-white/20">Dr. Rahul</span>
-                </button>
-              </div>
+                  >
+                    <span className={`w-2 h-2 rounded-full ${activeBranch === "viram" ? "bg-[#D4F634]" : "bg-slate-400"}`} />
+                    <span>Branch 2: Viram Khand 1</span>
+                    <span className="text-[10px] hidden sm:inline px-1.5 py-0.5 rounded bg-white/20">Dr. Rahul</span>
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Branch Card & Map Grid */}
@@ -696,14 +719,16 @@ export default function Home() {
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-emerald-800 text-[11px] font-bold border border-emerald-200 mb-3.5 shadow-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    {currentBranch.badge}
+                    {clinic.hasMultipleBranches ? currentBranch.badge : `Verified Dental Centre • ${clinic.reviews || "151+"} Reviews`}
                   </div>
 
                   <h3 className="font-heading font-bold text-2xl sm:text-3xl text-slate-900 mb-1">
-                    {currentBranch.tabTitle}
+                    {clinic.hasMultipleBranches ? currentBranch.tabTitle : clinic.name}
                   </h3>
                   <p className="text-xs sm:text-sm font-semibold text-[#38537b] mb-6">
-                    {currentBranch.doctor} • {currentBranch.specialty}
+                    {clinic.hasMultipleBranches
+                      ? `${currentBranch.doctor} • ${currentBranch.specialty}`
+                      : `${clinic.doctorName} • Senior Dental Specialists`}
                   </p>
 
                   <div className="space-y-5 text-xs sm:text-sm">
@@ -718,7 +743,7 @@ export default function Home() {
                       <div>
                         <h4 className="font-bold text-slate-900 mb-0.5">Clinic Address</h4>
                         <p className="text-slate-600 leading-relaxed">
-                          {currentBranch.address}
+                          {clinic.hasMultipleBranches ? currentBranch.address : clinic.address}
                         </p>
                       </div>
                     </div>
@@ -734,7 +759,9 @@ export default function Home() {
                       <div>
                         <h4 className="font-bold text-slate-900 mb-0.5">Consultation Timings</h4>
                         <p className="text-slate-600 leading-relaxed font-medium">
-                          {currentBranch.timings}
+                          {clinic.hasMultipleBranches
+                            ? currentBranch.timings
+                            : "Mon – Sat: 10:00 AM – 2:00 PM & 5:00 PM – 9:00 PM | Sun: By Prior Appointment"}
                         </p>
                       </div>
                     </div>
@@ -747,7 +774,14 @@ export default function Home() {
                       <div>
                         <h4 className="font-bold text-slate-900 mb-0.5">Direct Clinic Contact</h4>
                         <p className="text-slate-600 leading-relaxed">
-                          Phone: <a href={`tel:${currentBranch.phone}`} className="font-bold text-slate-900 hover:text-blue-600 transition-colors">{currentBranch.phoneDisplay}</a><br />
+                          Phone:{" "}
+                          <a
+                            href={`tel:${clinic.hasMultipleBranches ? currentBranch.phone : clinic.phone}`}
+                            className="font-bold text-slate-900 hover:text-blue-600 transition-colors"
+                          >
+                            {clinic.hasMultipleBranches ? currentBranch.phoneDisplay : clinic.phoneDisplay}
+                          </a>
+                          <br />
                           WhatsApp: Active for immediate priority scheduling
                         </p>
                       </div>
@@ -758,7 +792,11 @@ export default function Home() {
                 {/* Direct Action Buttons */}
                 <div className="mt-8 pt-6 border-t border-[#6da5d8]/20 flex flex-col sm:flex-row gap-3">
                   <a
-                    href={currentBranch.mapsUrl}
+                    href={
+                      clinic.hasMultipleBranches
+                        ? currentBranch.mapsUrl
+                        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(clinic.name + " " + clinic.address)}`
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-between px-4 py-3 rounded-xl bg-[#38537b] hover:bg-[#2b4263] text-white text-xs sm:text-sm font-semibold transition-all hover:scale-[1.01] group shadow-md"
@@ -774,7 +812,11 @@ export default function Home() {
                     </span>
                   </a>
                   <a
-                    href={currentBranch.waUrl}
+                    href={
+                      clinic.hasMultipleBranches
+                        ? currentBranch.waUrl
+                        : `https://wa.me/${clinic.phone}?text=${encodeURIComponent(`Hello Dr. / ${clinic.name}, I would like to book a consultation appointment.`)}`
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#D4F634] hover:bg-[#c6eb2b] text-slate-950 text-xs sm:text-sm font-bold shadow-md transition-all hover:scale-[1.01]"
@@ -786,16 +828,16 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Map Embed with Dynamic Key for instant update */}
+              {/* Map Embed */}
               <div className="lg:col-span-7 min-h-[340px] lg:min-h-full w-full bg-slate-200 relative">
                 <iframe
-                  key={currentBranch.id}
-                  src={currentBranch.embedUrl}
+                  key={clinic.hasMultipleBranches ? currentBranch.id : clinic.slug}
+                  src={clinic.hasMultipleBranches ? currentBranch.embedUrl : (clinic.mapsEmbedUrl || currentBranch.embedUrl)}
                   className="w-full h-full min-h-[360px] border-0"
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title={`Sai Specialized Dental Hospital ${currentBranch.tabTitle} Map`}
+                  title={`${clinic.name} Location Map`}
                 />
               </div>
 
@@ -804,13 +846,9 @@ export default function Home() {
         </section>
 
         {/* ==================================================================
-            7. TERMINAL CALL-TO-ACTION (Pre-Footer Closer)
-            ================================================================== */}
-        {/* ==================================================================
-            8. APPOINTMENT TIMING & INSTANT BOOKING (Authentic Client Timings Card)
+            11. APPOINTMENT TIMING & INSTANT BOOKING (Pre-Footer Terminal CTA)
             ================================================================== */}
         <section className="py-16 sm:py-24 bg-gradient-to-b from-[#6da5d8] via-[#547eb6] to-[#38537b] text-white relative overflow-hidden">
-          {/* Subtle Ambient Light Orbs */}
           <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
 
@@ -834,7 +872,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Authentic Schedule Card (Directly based on client's verified timing system) */}
+            {/* Schedule Card */}
             <div className="bg-white text-slate-900 rounded-3xl p-6 sm:p-10 shadow-2xl border border-white/40 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               {/* Left Column: Timing Breakdown */}
               <div className="space-y-4">
@@ -847,7 +885,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-heading font-bold text-lg sm:text-xl text-slate-900 leading-tight">Appointment Timing</h3>
-                    <p className="text-xs text-slate-500">Official Hospital Consultation Schedule</p>
+                    <p className="text-xs text-slate-500">Official Consultation Schedule</p>
                   </div>
                 </div>
 
@@ -887,7 +925,7 @@ export default function Home() {
 
                 <div className="space-y-3">
                   <a
-                    href="https://wa.me/919235179344?text=Hello%20Dr.%20Sumi,%20I%20would%20like%20to%20schedule%20a%20priority%20consultation%20appointment."
+                    href={`https://wa.me/${clinic.phone}?text=${encodeURIComponent(`Hello Dr. / ${clinic.name}, I would like to schedule a priority consultation appointment.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2.5 py-3.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
@@ -914,7 +952,7 @@ export default function Home() {
       </main>
 
       {/* ====================================================================
-          8. CLEAN FOOTER
+          12. CLEAN FOOTER
           ==================================================================== */}
       <footer className="bg-slate-950 text-slate-400 py-10 border-t border-slate-800 text-xs sm:text-sm">
         <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
@@ -922,17 +960,17 @@ export default function Home() {
             <div className="w-8 h-8 rounded-full bg-white p-1 overflow-hidden shrink-0 shadow-sm border border-slate-700 flex items-center justify-center">
               <img
                 src="/clinic_logo.png"
-                alt="Sai Specialized Dental Hospital"
+                alt={clinic.name}
                 className="w-full h-full object-contain"
               />
             </div>
             <div>
-              <h4 className="text-white font-bold text-base">Sai Specialized Dental Hospital</h4>
-              <p className="text-slate-500 text-xs mt-0.5">Vipul Khand 2, Gomti Nagar, Lucknow, UP 226010</p>
+              <h4 className="text-white font-bold text-base">{clinic.name}</h4>
+              <p className="text-slate-500 text-xs mt-0.5">{clinic.address}</p>
             </div>
           </div>
           <div className="text-slate-500 text-xs">
-            <p>© 2026 Sai Specialized Dental Hospital. All rights reserved.</p>
+            <p>© 2026 {clinic.name}. All rights reserved.</p>
             <p className="mt-1">
               High-Performance Web Design by{" "}
               <a
@@ -949,10 +987,18 @@ export default function Home() {
       </footer>
 
       {/* ====================================================================
-          9. MOBILE DOCK & INTERACTIVE BOOKING DRAWER
+          13. MOBILE DOCK & INTERACTIVE BOOKING DRAWER
           ==================================================================== */}
-      <MobileDock onOpenDrawer={openDrawer} />
-      <AppointmentDrawer isOpen={isDrawerOpen} onClose={closeDrawer} />
+      <MobileDock onOpenDrawer={openDrawer} clinic={clinic} />
+      <AppointmentDrawer isOpen={isDrawerOpen} onClose={closeDrawer} clinic={clinic} />
     </>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#6da5d8]" />}>
+      <DentalClinicContent />
+    </Suspense>
   );
 }

@@ -2,7 +2,9 @@
 
 import { FaPhone, FaWhatsapp } from "react-icons/fa6";
 
-export default function MobileDock({ onOpenDrawer }) {
+export default function MobileDock({ onOpenDrawer, clinic }) {
+  const phone = clinic?.phone || "919235179344";
+
   return (
     <nav 
       aria-label="Mobile Quick Actions" 
@@ -10,7 +12,7 @@ export default function MobileDock({ onOpenDrawer }) {
     >
       {/* 1-Tap Direct Call */}
       <a
-        href="tel:+919235179344"
+        href={`tel:+${phone.replace(/^\+/, "")}`}
         className="flex-1 flex items-center justify-center gap-2 h-12 rounded-xl bg-slate-900 text-white font-semibold text-xs active:scale-[0.98] transition-transform"
       >
         <FaPhone className="w-3.5 h-3.5 shrink-0" />

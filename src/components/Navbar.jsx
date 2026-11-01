@@ -5,9 +5,16 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { FaPhone } from "react-icons/fa6";
 
-export default function Navbar({ onOpenDrawer }) {
+export default function Navbar({ onOpenDrawer, clinic }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const brandTitle = clinic?.brandTitle || "SAI SPECIALIZED";
+  const brandSubtitle = clinic?.brandSubtitle || "Dental Hospital & Implant Centre";
+  const clinicName = clinic?.name || "Sai Specialized Dental Hospital";
+  const phone = clinic?.phone || "919235179344";
+  const phoneDisplay = clinic?.phoneDisplay || "092351 79344";
+  const reviewsCount = clinic?.reviews || "151+";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,10 +45,10 @@ export default function Navbar({ onOpenDrawer }) {
           </div>
           <div className="flex flex-col">
             <span className="font-heading font-bold text-base sm:text-lg text-white tracking-tight leading-none">
-              SAI SPECIALIZED
+              {brandTitle}
             </span>
             <span className="text-[10px] text-white/80 font-medium tracking-wider uppercase mt-0.5">
-              Dental Hospital &amp; Implant Centre
+              {brandSubtitle}
             </span>
           </div>
         </Link>
@@ -54,7 +61,7 @@ export default function Navbar({ onOpenDrawer }) {
           <a href="#results" className="px-3 py-1.5 rounded-full text-white/80 hover:text-[#D4F634] hover:bg-white/10 transition-all duration-200">See What’s Possible</a>
           <a href="#facility" className="px-3 py-1.5 rounded-full text-white/80 hover:text-[#D4F634] hover:bg-white/10 transition-all duration-200">Clinic Tour</a>
           <a href="#reviews" className="px-3 py-1.5 rounded-full text-white/80 hover:text-[#D4F634] hover:bg-white/10 transition-all duration-200">Reviews</a>
-          <a href="#location" className="px-3 py-1.5 rounded-full text-white/80 hover:text-[#D4F634] hover:bg-white/10 transition-all duration-200">Branches</a>
+          <a href="#location" className="px-3 py-1.5 rounded-full text-white/80 hover:text-[#D4F634] hover:bg-white/10 transition-all duration-200">{clinic?.hasMultipleBranches ? "Branches" : "Location"}</a>
         </nav>
 
         {/* Header Actions: Desktop Contacts Pill Button vs Mobile Hamburger Icon */}
@@ -138,14 +145,14 @@ export default function Navbar({ onOpenDrawer }) {
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-white/90 hover:text-white text-base font-medium transition-colors"
             >
-              Patient Reviews (151+ Verified)
+              Patient Reviews ({reviewsCount} Verified)
             </a>
             <a
               href="#location"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-white/90 hover:text-white text-base font-medium transition-colors"
             >
-              Two Branches &amp; Timings
+              {clinic?.hasMultipleBranches ? "Two Branches & Timings" : "Clinic Location & Timings"}
             </a>
             <div className="pt-4 border-t border-white/20 flex flex-col gap-3">
               <button
@@ -161,11 +168,11 @@ export default function Navbar({ onOpenDrawer }) {
                 </span>
               </button>
               <a
-                href="tel:09235179344"
+                href={`tel:${phone}`}
                 className="w-full py-3 px-5 rounded-2xl bg-white/10 border border-white/25 text-white font-medium text-xs flex items-center justify-center gap-2"
               >
                 <FaPhone className="w-3 h-3 text-white/90" />
-                <span>Direct Call: 092351 79344</span>
+                <span>Direct Call: {phoneDisplay}</span>
               </a>
             </div>
           </nav>

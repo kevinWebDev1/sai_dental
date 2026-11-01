@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 
 export default function TechnologySection({ onOpenDrawer }) {
+  const [showAllTech, setShowAllTech] = useState(false);
   const suites = [
     {
       kicker: "0.2-SEC INSTANT DIAGNOSTICS",
@@ -79,7 +82,7 @@ export default function TechnologySection({ onOpenDrawer }) {
 
         {/* Asymmetrical Horizontal Masonry Cards (Torrance Dentist-Inspired Shifting Seams) */}
         <div className="space-y-14 sm:space-y-18 max-w-[1340px] mx-auto">
-          {suites.map((suite, idx) => {
+          {(showAllTech ? suites : suites.slice(0, 2)).map((suite, idx) => {
             // Shifting horizontal masonry column splits across all 6 technologies:
             const configs = [
               { textCols: "lg:col-span-5", imgCols: "lg:col-span-7", textOrder: "lg:order-1", imgOrder: "lg:order-2" },
@@ -94,7 +97,7 @@ export default function TechnologySection({ onOpenDrawer }) {
             return (
               <div
                 key={idx}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch animate-in fade-in duration-300"
               >
                 {/* Dark Editorial Text Card */}
                 <div
@@ -164,6 +167,28 @@ export default function TechnologySection({ onOpenDrawer }) {
               </div>
             );
           })}
+        </div>
+
+        {/* Sleek See More / Show Less Button */}
+        <div className="mt-12 text-center">
+          <button
+            type="button"
+            onClick={() => setShowAllTech(!showAllTech)}
+            className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-[#1c1f22] hover:bg-slate-900 text-white font-semibold text-xs sm:text-sm border border-slate-700/60 shadow-md hover:shadow-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer group"
+          >
+            <span>
+              {showAllTech
+                ? "Show Less Technologies"
+                : `Explore All ${suites.length} Clinical Technologies`}
+            </span>
+            <span
+              className={`w-6 h-6 rounded-full bg-[#D4F634] text-slate-950 flex items-center justify-center transition-transform duration-300 ${
+                showAllTech ? "rotate-180" : "group-hover:translate-y-0.5"
+              }`}
+            >
+              <ChevronDown className="w-3.5 h-3.5" />
+            </span>
+          </button>
         </div>
 
       </div>

@@ -5,10 +5,30 @@ import Image from "next/image";
 import { X, Check, Clock, ShieldCheck, Star } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 
-export default function AppointmentDrawer({ isOpen, onClose }) {
+export default function AppointmentDrawer({ isOpen, onClose, clinic }) {
   const [selectedService, setSelectedService] = useState("Tooth Pain / Root Canal");
   const [selectedTime, setSelectedTime] = useState("Evening (5 PM - 9 PM)");
   const [patientName, setPatientName] = useState("");
+
+  const clinicName = clinic?.name || "Sai Specialized Dental Hospital";
+  const phone = clinic?.phone || "919235179344";
+  const area = clinic?.area || "Gomti Nagar, Lucknow";
+  const reviews = clinic?.reviews || "151+";
+  const rating = clinic?.rating || "4.9";
+  const doctors = clinic?.doctors || [
+    {
+      name: "Dr. Sumi Tiwari",
+      role: "Lead Surgeon",
+      branch: "Vipul Khand 2",
+      image: "/doctors/dr_sumi_tiwari.png",
+    },
+    {
+      name: "Dr. Rahul Tiwari",
+      role: "Implantologist",
+      branch: "Viram Khand 1",
+      image: "/doctors/dr_rahul_tiwari.png",
+    },
+  ];
 
   if (!isOpen) return null;
 
@@ -86,10 +106,10 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
   const handleSendWhatsApp = () => {
     const greeting = new Date().getHours() < 12 ? "Good morning" : new Date().getHours() < 17 ? "Good afternoon" : "Good evening";
     const nameText = patientName.trim() ? `My name is ${patientName.trim()}. ` : "";
-    const message = `${greeting} Dr. / Sai Specialized Dental Hospital. ${nameText}I would like to schedule an appointment for: *${selectedService}*. Preferred Timing: *${selectedTime}*. Please confirm availability.`;
+    const message = `${greeting} Dr. / ${clinicName}. ${nameText}I would like to schedule an appointment for: *${selectedService}*. Preferred Timing: *${selectedTime}*. Please confirm availability.`;
     
     const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/919235179344?text=${encoded}`, "_blank");
+    window.open(`https://wa.me/${phone.replace(/^\+/, "")}?text=${encoded}`, "_blank");
     onClose();
   };
 
@@ -114,7 +134,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
               <div className="w-9 h-9 rounded-xl bg-white p-1 border border-white/20 flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
                 <img
                   src="/clinic_logo.png"
-                  alt="Sai Specialized Dental Hospital Official Logo"
+                  alt={`${clinicName} Official Logo`}
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -123,7 +143,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
                   Hospital Consultation
                 </span>
                 <span className="text-xs font-semibold text-white/90">
-                  Gomti Nagar, Lucknow
+                  {area}
                 </span>
               </div>
             </div>
@@ -133,40 +153,27 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
             </h3>
 
             <p className="text-white/75 text-xs lg:text-[13px] leading-relaxed mb-6 font-normal">
-              Select your concern and timing. Dr. Sumi and Dr. Rahul&apos;s clinical team confirms your exact appointment directly on WhatsApp in minutes.
+              Select your concern and timing. Our clinical team confirms your exact appointment directly on WhatsApp in minutes.
             </p>
 
             {/* Treating Specialist Badges */}
             <div className="space-y-3 pt-4 border-t border-white/10">
-              <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl p-2.5">
-                <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-white/10 shrink-0">
-                  <Image
-                    src="/doctors/dr_sumi_tiwari.png"
-                    alt="Dr. Sumi Tiwari"
-                    fill
-                    className="object-cover object-top"
-                  />
+              {doctors.map((doc, idx) => (
+                <div key={idx} className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl p-2.5">
+                  <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-white/10 shrink-0">
+                    <Image
+                      src={doc.image || "/doctors/dr_sumi_tiwari.png"}
+                      alt={doc.name}
+                      fill
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-white">{doc.name}</h4>
+                    <p className="text-[11px] text-sky-200">{doc.role}{doc.branch ? ` • ${doc.branch}` : ""}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-xs font-bold text-white">Dr. Sumi Tiwari</h4>
-                  <p className="text-[11px] text-sky-200">Lead Surgeon • Vipul Khand 2</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl p-2.5">
-                <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-white/10 shrink-0">
-                  <Image
-                    src="/doctors/dr_rahul_tiwari.png"
-                    alt="Dr. Rahul Tiwari"
-                    fill
-                    className="object-cover object-top"
-                  />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-white">Dr. Rahul Tiwari</h4>
-                  <p className="text-[11px] text-sky-200">Implantologist • Viram Khand 1</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -174,7 +181,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
           <div className="relative z-10 pt-6 border-t border-white/10 flex items-center justify-between text-[11px] text-white/80">
             <div className="flex items-center gap-1.5">
               <Star className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
-              <span className="font-semibold">4.9 • 151+ Reviews</span>
+              <span className="font-semibold">{rating} • {reviews} Reviews</span>
             </div>
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
@@ -203,7 +210,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
                 Quick Appointment
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                Direct WhatsApp booking with Sai Dental reception
+                Direct WhatsApp booking with {clinicName} reception
               </p>
             </div>
             <button
@@ -315,7 +322,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
             </button>
             <div className="flex items-center justify-center gap-1.5 text-center text-[11px] text-slate-500 mt-2.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              <span>Instant confirmation • Zero waiting room delays • Vipul &amp; Viram Khand</span>
+              <span>Instant confirmation • Zero waiting room delays • {area}</span>
             </div>
           </div>
         </div>

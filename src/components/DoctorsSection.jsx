@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 
-export default function DoctorsSection({ onOpenDrawer }) {
-  const doctors = [
+export default function DoctorsSection({ onOpenDrawer, customDoctors }) {
+  const defaultDoctors = [
     {
       num: "01",
       name: "Dr. Sumi Tiwari",
@@ -38,6 +38,8 @@ export default function DoctorsSection({ onOpenDrawer }) {
     }
   ];
 
+  const doctors = customDoctors && customDoctors.length > 0 ? customDoctors : defaultDoctors;
+
   return (
     <section id="doctors" className="py-16 sm:py-24 bg-white relative border-t border-slate-100">
       <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9">
@@ -57,8 +59,8 @@ export default function DoctorsSection({ onOpenDrawer }) {
           </p>
         </div>
 
-        {/* Clean 2-Column Doctor Grid (50% Portrait + 50% Info, Zero Clutter) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 max-w-[1340px] mx-auto">
+        {/* Clean Doctor Grid (Adapts automatically to 1 or 2 doctors) */}
+        <div className={`grid grid-cols-1 ${doctors.length === 1 ? "max-w-2xl" : "lg:grid-cols-2 max-w-[1340px]"} gap-8 lg:gap-10 mx-auto`}>
           {doctors.map((doc, idx) => (
             <div
               key={idx}
