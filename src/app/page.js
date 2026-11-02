@@ -914,17 +914,11 @@ function DentalClinicContent() {
         <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-white p-1 overflow-hidden shrink-0 shadow-sm border border-slate-700 flex items-center justify-center">
-              {clinic.slug === "sai" ? (
-                <img
-                  src="/branding/logo.png"
-                  alt={clinic.name}
-                  className="w-full h-full object-contain"
-                />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-br from-[#1c2e4a] to-[#38537b] flex items-center justify-center text-[#D4F634] font-black text-xs tracking-wider rounded-full">
-                  {clinic.initials || "DC"}
-                </div>
-              )}
+              <img
+                src={clinic.logo || "/branding/logo.png"}
+                alt={clinic.name}
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <h4 className="text-white font-bold text-base">{clinic.name}</h4>
