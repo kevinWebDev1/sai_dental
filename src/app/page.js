@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { FaWhatsapp, FaPhone, FaLocationDot, FaGoogle } from "react-icons/fa6";
@@ -19,6 +19,12 @@ import ClinicTourSection from "@/components/ClinicTourSection";
 function DentalClinicContent() {
   const searchParams = useSearchParams();
   const clinic = getClinicConfig(searchParams);
+
+  useEffect(() => {
+    if (clinic?.name) {
+      document.title = `${clinic.name} | Top-Rated Dental Care in Lucknow`;
+    }
+  }, [clinic]);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeBranch, setActiveBranch] = useState("vipul"); // 'vipul' | 'viram'
