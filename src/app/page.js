@@ -140,7 +140,7 @@ function DentalClinicContent() {
               }}
             >
               <Image
-                src="/hero/Dentists_cleaning_giant_tooth_2K.jpg"
+                src="/hero/hero_main.jpg"
                 alt={`Miniature dental surgeons cleaning giant molar tooth - ${clinic.name}`}
                 fill
                 priority
@@ -206,7 +206,7 @@ function DentalClinicContent() {
                 <div className="hidden lg:flex items-end w-full mt-auto">
                   <div className="relative w-64 lg:w-76 xl:w-88 2xl:w-[25rem] h-64 lg:h-76 xl:h-88 2xl:h-[25rem] shrink-0">
                     <Image
-                      src="/hero/hero_patient_stat.png"
+                      src="/hero/hero_stat_badge.png"
                       alt={`98% loyal dental patients - ${clinic.name}`}
                       fill
                       priority
@@ -221,7 +221,7 @@ function DentalClinicContent() {
               <div className="lg:hidden relative w-screen -mx-5 sm:-mx-7 sm:w-full sm:mx-auto sm:max-w-[500px] aspect-square flex items-end justify-center mt-2 sm:mt-4">
                 <div className="relative w-full h-full">
                   <Image
-                    src="/hero/Dentists_cleaning_giant_tooth_2K.jpg"
+                    src="/hero/hero_main.jpg"
                     alt={`Miniature dental surgeons cleaning giant molar tooth - ${clinic.name}`}
                     fill
                     priority
@@ -479,7 +479,7 @@ function DentalClinicContent() {
               <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group border border-slate-100">
                   <Image
-                    src={clinic?.photos?.desk || (clinic.slug === "sai" ? "/clinic/clinic_photo_2.jpg" : "/clinic/neutral/modern_consultation_desk.jpg")}
+                    src={clinic?.photos?.desk || (clinic.slug === "sai" ? "/clinic/clinic_desk.jpg" : "/clinic/neutral/modern_consultation_desk.jpg")}
                     alt={`${clinic.name} Consultation Desk`}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -492,7 +492,7 @@ function DentalClinicContent() {
 
                 <div className="relative rounded-2xl overflow-hidden shadow-md aspect-[4/3] group border border-slate-100">
                   <Image
-                    src={clinic?.photos?.operatory || (clinic.slug === "sai" ? "/clinic/clinic_photo_3.jpg" : "/clinic/neutral/advanced_operatory.jpg")}
+                    src={clinic?.photos?.operatory || (clinic.slug === "sai" ? "/clinic/clinic_operatory.jpg" : "/clinic/neutral/advanced_operatory.jpg")}
                     alt="Sanitized Dental Operatory"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -910,7 +910,7 @@ function DentalClinicContent() {
             <div className="w-8 h-8 rounded-full bg-white p-1 overflow-hidden shrink-0 shadow-sm border border-slate-700 flex items-center justify-center">
               {clinic.slug === "sai" ? (
                 <img
-                  src="/clinic_logo.png"
+                  src="/branding/logo.png"
                   alt={clinic.name}
                   className="w-full h-full object-contain"
                 />

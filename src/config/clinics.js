@@ -34,7 +34,7 @@ export const CLINICS = {
         role: "Lead Dental Surgeon & Aesthetic Specialist",
         branch: "Vipul Khand 2 (Jeevan Plaza)",
         branchShort: "Vipul Khand",
-        photo: "/doctors/dr_sumi_tiwari.png",
+        photo: "/doctors/doctor_1.png",
         phoneRaw: "09235179344",
         specialties: [
           "Painless Single-Sitting Root Canals",
@@ -50,7 +50,7 @@ export const CLINICS = {
         role: "Founder & Senior Implantologist",
         branch: "Viram Khand 1 (Opp. Bank of Baroda)",
         branchShort: "Viram Khand",
-        photo: "/doctors/dr_rahul_tiwari.png",
+        photo: "/doctors/doctor_2.png",
         phoneRaw: "09935571751",
         specialties: [
           "Permanent Titanium Dental Implants",
@@ -149,7 +149,7 @@ export const CLINICS = {
         role: "Oral & Maxillofacial Surgeon • Senior Implantologist",
         branch: "Vishesh Khand 2, Gomti Nagar",
         branchShort: "Vishesh Khand",
-        photo: "/doctors/prospects/dr_female_surgeon_1.jpg",
+        photo: "/prospects/dixit/doctor_1.jpg",
         phoneRaw: "09450954659",
         specialties: [
           "Permanent Titanium Dental Implants",
@@ -158,7 +158,28 @@ export const CLINICS = {
         ],
         badgeColor: "bg-teal-50 text-teal-800 border-teal-200",
       },
+      {
+        num: "02",
+        name: "Specialist Consultant Team",
+        degrees: "M.D.S Specialists",
+        role: "Senior Dental & Implant Team",
+        branch: "Vishesh Khand 2, Gomti Nagar",
+        branchShort: "Vishesh Khand",
+        photo: "/prospects/dixit/doctor_2.jpg",
+        phoneRaw: "09450954659",
+        specialties: [
+          "Precision Dental Implant Restorations",
+          "Aesthetic Smile Design & Crowns",
+          "Single-Sitting Root Canal Care",
+        ],
+        badgeColor: "bg-blue-50 text-blue-800 border-blue-200",
+      },
     ],
+    photos: {
+      desk: "/prospects/dixit/clinic_desk.jpg",
+      operatory: "/prospects/dixit/clinic_operatory.jpg",
+      tech: "/prospects/dixit/clinic_chairside_tech.jpg",
+    },
     testimonials: [
       {
         name: "Ankit Tandon",
@@ -248,7 +269,7 @@ export const CLINICS = {
         role: "Lead Dental Surgeon & Senior Implantologist",
         branch: "1/353, Viram Khand 1 (Near Mr. Brown)",
         branchShort: "Viram Khand 1",
-        photo: "/doctors/prospects/dr_male_surgeon_1.jpg",
+        photo: "/prospects/dentsquare/doctor_1.jpg",
         phoneRaw: "07007785779",
         specialties: [
           "Painless Single-Visit Root Canals",
@@ -257,7 +278,29 @@ export const CLINICS = {
         ],
         badgeColor: "bg-teal-50 text-teal-800 border-teal-200",
       },
+      {
+        num: "02",
+        name: "Specialist Associate Surgeon",
+        degrees: "B.D.S • Clinical Associate",
+        role: "Associate Dental Surgeon",
+        branch: "1/353, Viram Khand 1",
+        branchShort: "Viram Khand 1",
+        photo: "/prospects/dentsquare/doctor_2.jpg",
+        phoneRaw: "07007785779",
+        specialties: [
+          "Gentle Ultrasonic Scaling & Polishing",
+          "Aesthetic Restorations & Fillings",
+          "Preventive Care & Consultations",
+        ],
+        badgeColor: "bg-blue-50 text-blue-800 border-blue-200",
+      },
     ],
+    photos: {
+      desk: "/prospects/dentsquare/clinic_desk.jpg",
+      operatory: "/prospects/dentsquare/clinic_operatory.jpg",
+      waiting: "/prospects/dentsquare/clinic_waiting.jpg",
+      tech: "/prospects/dentsquare/clinic_chairside_tech.jpg",
+    },
     testimonials: [
       {
         name: "Siddharth Verma",
@@ -318,7 +361,7 @@ export const CLINICS = {
     brandTitle: "FAMILY DENTAL",
     brandSubtitle: "Comprehensive Care & Implant Centre",
     initials: "FD",
-    doctorName: "Dr. Abhinav Singh",
+    doctorName: "Dr. Neha Sharma",
     phone: "917309194892",
     phoneDisplay: "073091 94892",
     rating: "4.9",
@@ -329,9 +372,9 @@ export const CLINICS = {
     hasMultipleBranches: false,
     heroButtons: [
       {
-        label: "Book Consultation (Dr. Abhinav)",
+        label: "Book Consultation (Dr. Neha)",
         phone: "917309194892",
-        message: "Hello Dr. Abhinav, I would like to schedule an appointment at Family Dental Care.",
+        message: "Hello Dr. Neha, I would like to schedule an appointment at Family Dental Care.",
       },
       {
         label: "Direct Call (073091 94892)",
@@ -342,12 +385,12 @@ export const CLINICS = {
     doctors: [
       {
         num: "01",
-        name: "Dr. Abhinav Singh",
-        degrees: "B.D.S • M.I.D.A",
-        role: "Chief Dental Surgeon & Senior Implantologist",
+        name: "Dr. Neha Sharma",
+        degrees: "B.D.S • Certified Implantologist (iF)",
+        role: "Lead Dental Surgeon & Senior Implantologist",
         branch: "1/816 Vardan Khand (Near PNB), Sector 1",
         branchShort: "Vardan Khand",
-        photo: "/doctors/prospects/dr_male_surgeon_2.jpg",
+        photo: "/prospects/family/doctor_1.jpg",
         phoneRaw: "07309194892",
         specialties: [
           "Dental Implants & Fixed Teeth",
@@ -357,13 +400,19 @@ export const CLINICS = {
         badgeColor: "bg-teal-50 text-teal-800 border-teal-200",
       },
     ],
+    photos: {
+      desk: "/prospects/family/clinic_desk.jpg",
+      operatory: "/prospects/family/clinic_operatory.jpg",
+      waiting: "/prospects/family/clinic_waiting.jpg",
+      exterior: "/prospects/family/clinic_exterior.jpg",
+    },
     testimonials: [
       {
         name: "Alok Tripathi",
         location: "Verified Patient • 6 Google Reviews",
         rating: 5,
         avatarBg: "bg-[#1c2e4a] text-white",
-        review: "Got my dental implant and molar crown done here. Very systematic treatment and reasonable rates. Dr. Abhinav takes unhurried time to listen to your concerns.",
+        review: "Got my dental implant and molar crown done here. Very systematic treatment and reasonable rates. Dr. Neha takes unhurried time to listen to your concerns.",
         tag: "Dental Implant",
       },
       {
@@ -395,7 +444,7 @@ export const CLINICS = {
         location: "Local Guide • 11 Reviews",
         rating: 5,
         avatarBg: "bg-indigo-700 text-white",
-        review: "Very hygienic setup near PNB Vardan Khand. Dr. Abhinav saved my severely decayed molar with a single sitting RCT and zirconia cap. 10/10!",
+        review: "Very hygienic setup near PNB Vardan Khand. Dr. Neha saved my severely decayed molar with a single sitting RCT and zirconia cap. 10/10!",
         tag: "Single-Sitting RCT",
       },
       {
@@ -456,6 +505,13 @@ export const CLINICS = {
         badgeColor: "bg-teal-50 text-teal-800 border-teal-200",
       },
     ],
+    photos: {
+      desk: "/prospects/pearl/clinic_desk.jpg",
+      operatory: "/prospects/pearl/clinic_operatory.jpg",
+      waiting: "/prospects/pearl/clinic_waiting.jpg",
+      tech: "/prospects/pearl/clinic_chairside_tech.jpg",
+      exterior: "/prospects/pearl/clinic_exterior.jpg",
+    },
     testimonials: [
       {
         name: "Dr. Archana Shukla",
@@ -515,9 +571,17 @@ export const CLINICS = {
  * Resolves clinic data by slug or dynamic query parameters.
  */
 export function getClinicConfig(searchParams) {
-  if (!searchParams) return CLINICS.sai;
+  let key = (searchParams?.get("c") || "").toLowerCase().trim();
 
-  const key = (searchParams.get("c") || "").toLowerCase().trim();
+  // If no explicit ?c= query parameter, detect clinic from domain hostname
+  if (!key && typeof window !== "undefined") {
+    const host = window.location.hostname.toLowerCase();
+    if (host.includes("family")) key = "family";
+    else if (host.includes("pearl")) key = "pearl";
+    else if (host.includes("dentsquare")) key = "dentsquare";
+    else if (host.includes("dixit")) key = "dixit";
+  }
+
   if (key && CLINICS[key]) {
     return CLINICS[key];
   }

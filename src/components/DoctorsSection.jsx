@@ -11,7 +11,7 @@ export default function DoctorsSection({ onOpenDrawer, customDoctors }) {
       role: "Lead Dental Surgeon & Aesthetic Specialist",
       branch: "Vipul Khand 2 (Jeevan Plaza)",
       branchShort: "Vipul Khand",
-      photo: "/doctors/dr_sumi_tiwari.png",
+      photo: "/doctors/doctor_1.png",
       phoneRaw: "09235179344",
       specialties: [
         "Painless Single-Sitting Root Canals",
@@ -27,7 +27,7 @@ export default function DoctorsSection({ onOpenDrawer, customDoctors }) {
       role: "Founder & Senior Implantologist",
       branch: "Viram Khand 1 (Opp. Bank of Baroda)",
       branchShort: "Viram Khand",
-      photo: "/doctors/dr_rahul_tiwari.png",
+      photo: "/doctors/doctor_2.png",
       phoneRaw: "09935571751",
       specialties: [
         "Permanent Titanium Dental Implants",
@@ -121,7 +121,7 @@ export default function DoctorsSection({ onOpenDrawer, customDoctors }) {
                     onClick={onOpenDrawer}
                     className="inline-flex items-center gap-2.5 pl-5 pr-2 py-2 rounded-full border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-900 text-xs sm:text-sm font-semibold shadow-2xs transition-all hover:scale-[1.02] active:scale-[0.99] group/btn"
                   >
-                    <span>Book Consultation with {doc.name.split(" ")[1]}</span>
+                    <span>Book Consultation with {doc.name.split(" ").slice(0, 2).join(" ")}</span>
                     <span className="w-6 h-6 rounded-full bg-[#D4F634] flex items-center justify-center text-slate-900 shrink-0 group-hover/btn:rotate-45 transition-transform duration-300">
                       <svg viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5">
                         <path fillRule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clipRule="evenodd" />

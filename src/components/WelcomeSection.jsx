@@ -8,12 +8,12 @@ export default function WelcomeSection({ onOpenDrawer, clinic }) {
   const leadDoctor = clinic?.doctors?.[0] || {
     name: "Dr. Sumi Tiwari",
     role: "Lead Dental Surgeon",
-    photo: "/doctors/dr_sumi_tiwari.png",
+    photo: "/doctors/doctor_1.png",
   };
-  const doctorPhoto = leadDoctor.photo || leadDoctor.image || "/doctors/dr_sumi_tiwari.png";
-  const techPhoto = clinic?.photos?.tech || (isSai ? "/clinic/sai_clinic_photo_02.jpg" : "/clinic/neutral/digital_imaging_suite.jpg");
-  const deskPhoto = clinic?.photos?.desk || (isSai ? "/clinic/clinic_photo_2.jpg" : "/clinic/neutral/modern_consultation_desk.jpg");
-  const operatoryPhoto = clinic?.photos?.operatory || (isSai ? "/clinic/clinic_photo_2.jpg" : "/clinic/neutral/advanced_operatory.jpg");
+  const doctorPhoto = leadDoctor.photo || leadDoctor.image || "/doctors/doctor_1.png";
+  const techPhoto = clinic?.photos?.tech || (isSai ? "/clinic/clinic_chairside_tech.jpg" : "/clinic/neutral/digital_imaging_suite.jpg");
+  const deskPhoto = clinic?.photos?.desk || (isSai ? "/clinic/clinic_desk.jpg" : "/clinic/neutral/modern_consultation_desk.jpg");
+  const operatoryPhoto = clinic?.photos?.operatory || (isSai ? "/clinic/clinic_operatory.jpg" : "/clinic/neutral/advanced_operatory.jpg");
   return (
     <section id="welcome" className="py-16 sm:py-24 bg-white relative overflow-hidden">
       <div className="w-full max-w-[1720px] mx-auto px-5 sm:px-7 lg:px-8 xl:px-9">

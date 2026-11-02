@@ -7,27 +7,27 @@ export default function ClinicTourSection({ clinic }) {
 
   const saiPhotos = [
     {
-      src: "/clinic/tour/doctor_consultation_desk.jpg",
+      src: "/clinic/clinic_desk.jpg",
       title: "Doctor Consultation Desk",
       desc: "Private, air-conditioned consultation room for comfortable diagnostics and treatment discussions.",
     },
     {
-      src: "/clinic/tour/primary_dental_operatory.jpg",
+      src: "/clinic/clinic_operatory.jpg",
       title: "Primary Dental Operatory",
       desc: "Ergonomic dental chair with LED operating lamps and digital chairside display.",
     },
     {
-      src: "/clinic/tour/sterilized_delivery_unit.jpg",
+      src: "/clinic/clinic_delivery_unit.jpg",
       title: "Sterilized Delivery Unit",
       desc: "Automated rotary dental unit equipped with autoclaved micro-motor handpieces.",
     },
     {
-      src: "/clinic/tour/patient_waiting_lounge.jpg",
+      src: "/clinic/clinic_waiting.jpg",
       title: "Patient Waiting Lounge",
       desc: "Clean, hygienic, and calm waiting reception for families and accompanying visitors.",
     },
     {
-      src: "/clinic/tour/sterilization_hygiene_station.jpg",
+      src: "/clinic/clinic_sterilization.jpg",
       title: "Sterilization & Hygiene Station",
       desc: "Hospital-grade autoclave pouches ensuring 100% sterile tools for every individual appointment.",
     },
@@ -61,7 +61,37 @@ export default function ClinicTourSection({ clinic }) {
     },
   ];
 
-  const photos = clinic?.tourPhotos || (isSai ? saiPhotos : neutralPhotos);
+  const prospectPhotos = clinic?.photos ? [
+    {
+      src: clinic.photos.operatory || "/clinic/neutral/advanced_operatory.jpg",
+      title: "Sanitized Treatment Operatory",
+      desc: "Ergonomic dental chair equipped with glare-free LED lighting and digital examination monitors.",
+    },
+    {
+      src: clinic.photos.desk || "/clinic/neutral/modern_consultation_desk.jpg",
+      title: "Doctor Consultation Suite",
+      desc: "Private consultation environment for thorough diagnostics and transparent treatment planning.",
+    },
+    {
+      src: clinic.photos.waiting || "/clinic/neutral/modern_waiting_lounge.jpg",
+      title: "Patient Reception & Lounge",
+      desc: "Clean, hygienic, and calm reception area ensuring zero crowd congestion and prompt appointment schedules.",
+    },
+    {
+      src: clinic.photos.tech || "/clinic/neutral/digital_imaging_suite.jpg",
+      title: "Digital Chairside Diagnostics",
+      desc: "Ultra-low-dose digital sensors delivering immediate sub-millimeter diagnostic clarity on chairside screens.",
+    },
+    {
+      src: clinic.photos.exterior || "/clinic/neutral/sterilization_station.jpg",
+      title: clinic.photos.exterior ? "Clinic Entrance & Exterior" : "Class-B Autoclave Sterilization",
+      desc: clinic.photos.exterior
+        ? "Welcoming clinic entrance and easily accessible facility."
+        : "Hospital-grade vacuum autoclaving with single-use sealed pouches for 100% instrument sterility.",
+    },
+  ] : null;
+
+  const photos = clinic?.tourPhotos || (isSai ? saiPhotos : (prospectPhotos || neutralPhotos));
 
   return (
     <section id="facility" className="py-16 sm:py-24 bg-white relative">

@@ -39,7 +39,7 @@ export default function Navbar({ onOpenDrawer, clinic }) {
           <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden shrink-0 shadow-sm border border-white/40 bg-white transition-transform group-hover:scale-105 flex items-center justify-center">
             {clinic?.slug === "sai" || !clinic ? (
               <img
-                src="/clinic_logo.png"
+                src="/branding/logo.png"
                 alt={`${clinicName} Official Logo`}
                 className="w-full h-full object-contain p-1"
               />

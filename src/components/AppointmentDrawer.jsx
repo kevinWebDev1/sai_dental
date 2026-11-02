@@ -134,7 +134,7 @@ export default function AppointmentDrawer({ isOpen, onClose, clinic }) {
               <div className="w-9 h-9 rounded-xl bg-white p-1 border border-white/20 flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
                 {clinic?.slug === "sai" || !clinic ? (
                   <img
-                    src="/clinic_logo.png"
+                    src="/branding/logo.png"
                     alt={`${clinicName} Official Logo`}
                     className="w-full h-full object-contain"
                   />
@@ -168,7 +168,7 @@ export default function AppointmentDrawer({ isOpen, onClose, clinic }) {
                 <div key={idx} className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl p-2.5">
                   <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-white/10 shrink-0">
                     <Image
-                      src={doc.image || "/doctors/dr_sumi_tiwari.png"}
+                      src={doc.photo || doc.image || "/doctors/doctor_1.png"}
                       alt={doc.name}
                       fill
                       className="object-cover object-top"

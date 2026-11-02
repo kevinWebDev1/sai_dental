@@ -15,17 +15,17 @@ export default function BeforeAfterSlider({ onOpenDrawer }) {
       stages: [
         {
           label: "Before",
-          image: "/cases/case_stage1_preop.jpg",
+          image: "/cases/case_01_step_1.jpg",
           alt: "Pre-operative clinical photograph of missing teeth and space collapse",
         },
         {
           label: "After Implant Placement",
-          image: "/cases/case_before.png",
+          image: "/cases/case_01_step_2.png",
           alt: "Clinical photograph showing osseointegrated titanium implant abutments in lower jaw",
         },
         {
           label: "After Fixed Ceramic Teeth",
-          image: "/cases/case_after.png",
+          image: "/cases/case_01_step_3.png",
           alt: "Post-operative finished clinical outcome showing patient smiling with natural fixed teeth",
         },
       ],
@@ -39,17 +39,17 @@ export default function BeforeAfterSlider({ onOpenDrawer }) {
       stages: [
         {
           label: "Before",
-          image: "/cases/case_veneer_1.jpg",
+          image: "/cases/case_02_step_1.jpg",
           alt: "Pre-operative view showing anterior diastema gap between front teeth",
         },
         {
           label: "After Orthodontic Alignment",
-          image: "/cases/case_veneer_2.jpg",
+          image: "/cases/case_02_step_2.jpg",
           alt: "Mid-treatment clinical view showing clear orthodontic aligner seated on teeth",
         },
         {
           label: "After Porcelain Veneers",
-          image: "/cases/case_veneer_3.jpg",
+          image: "/cases/case_02_step_3.jpg",
           alt: "Finished aesthetic outcome showing radiant patient smile with closed gap",
         },
       ],
@@ -63,17 +63,17 @@ export default function BeforeAfterSlider({ onOpenDrawer }) {
       stages: [
         {
           label: "Before",
-          image: "/cases/case_composite_1_before_v2.jpg",
+          image: "/cases/case_03_step_1.jpg",
           alt: "Pre-operative clinical photograph showing rotated, overlapping upper central incisors and deep gumline stains",
         },
         {
           label: "Precision Composite Bonding",
-          image: "/cases/case_composite_2_bonding_v2.jpg",
+          image: "/cases/case_03_step_2.jpg",
           alt: "Mid-procedure clinical photograph showing direct composite veneer application and isolation",
         },
         {
           label: "After Aesthetic Smile Makeover",
-          image: "/cases/case_composite_3_after_v2.jpg",
+          image: "/cases/case_03_step_3.jpg",
           alt: "Post-operative outcome showing perfectly aligned, polished composite veneers with healthy gums",
         },
       ],
@@ -87,17 +87,17 @@ export default function BeforeAfterSlider({ onOpenDrawer }) {
       stages: [
         {
           label: "Before",
-          image: "/cases/case_rct_1_before_v2.jpg",
+          image: "/cases/case_04_step_1.jpg",
           alt: "Pre-operative intraoral photograph showing severe molar decay and cavitation",
         },
         {
           label: "Rotary Cleaning & Prep",
-          image: "/cases/case_rct_2_prep_v2.jpg",
+          image: "/cases/case_04_step_2.jpg",
           alt: "Mid-treatment clinical photograph showing rotary endodontic instrumentation and conservative tooth prep",
         },
         {
           label: "After Ceramic Crown",
-          image: "/cases/case_rct_3_after_v2.jpg",
+          image: "/cases/case_04_step_3.jpg",
           alt: "Finished clinical result showing life-like monolithic ceramic crown with perfect occlusal anatomy",
         },
       ],

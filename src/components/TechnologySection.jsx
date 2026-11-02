@@ -12,8 +12,8 @@ export default function TechnologySection({ onOpenDrawer }) {
       title: "Vatech Digital RVG & Chairside HD Screen",
       desc: "Instant tooth root and bone density X-rays in under half a second with 90% less radiation. Scans are displayed live in crystal clarity on your chairside monitor before any procedure begins.",
       buttonText: "Digital X-Ray Screening",
-      image: "/technology/tech_vatech_rvg.jpg",
-      mobileImage: "/technology/mobile/tech_vatech_rvg.jpg",
+      image: "/technology/tech_rvg.jpg",
+      mobileImage: "/technology/mobile/tech_rvg.jpg",
       imageAlt: "Vatech digital RVG intraoral sensor with chairside HD monitor dental scan",
     },
     {
@@ -21,8 +21,8 @@ export default function TechnologySection({ onOpenDrawer }) {
       title: "Computerized Apex Locator & Rotary Endomotor",
       desc: "Micro-motor rotary technology that calculates root depth to 0.1mm. Smoothly glides through curved canals with motorized precision, eliminating manual scraping, vibration, and patient discomfort.",
       buttonText: "Rotary Endodontics Care",
-      image: "/technology/tech_endoradar.jpg",
-      mobileImage: "/technology/mobile/tech_endoradar.jpg",
+      image: "/technology/tech_apex_locator.jpg",
+      mobileImage: "/technology/mobile/tech_apex_locator.jpg",
       imageAlt: "Digital cordless rotary endomotor handpiece with OLED display",
     },
     {
